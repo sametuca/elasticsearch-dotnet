@@ -12,17 +12,17 @@ namespace elasticsearch_dotnet
     {
         static void Main(string[] args)
         {
-            var node = new Uri("http://localhost:9200"); // Elasticsearch sunucusunun URL'si
+            var node = new Uri("http://localhost:9200");
             var settings = new ConnectionSettings(node)
-                .DefaultIndex("your-default-index-name")
-                .DisableDirectStreaming();// Varsayılan indeks adını belirtin
+                .DefaultIndex("sametuca-medium")
+                .DisableDirectStreaming();
             var client = new ElasticClient(settings);
 
             var document = new MyDocument
             {
                 Id = 1,
-                Title = "Örnek Belge",
-                Content = "Bu bir Elasticsearch örneği."
+                Title = "Örnek Belge 1",
+                Content = "Elasticsearch medium makalesi için örnek - sametuca"
             };
 
             // Belgeyi indeksleme
@@ -39,7 +39,7 @@ namespace elasticsearch_dotnet
 
             // Belgeyi sorgulama
             var searchResponse = client.Search<MyDocument>(s => s
-                .Index("your-default-index-name") // Sorgulama yapmak istediğiniz indeks adı
+                .Index("sametuca-medium")
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Title)
@@ -47,8 +47,10 @@ namespace elasticsearch_dotnet
                     )
                 )
             );
-            var res = searchResponse.DebugInformation;
-            Console.WriteLine(res);
+
+            //bir hata olduğunda detaylı bilgi alabiliriz. 
+            //var res = searchResponse.DebugInformation;
+            //Console.WriteLine(res);
 
             if (searchResponse.IsValid)
             {
