@@ -2,12 +2,6 @@
 
 namespace elasticsearch_dotnet
 {
-    public class MyDocument
-    {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Content { get; set; }
-    }
     internal class Program
     {
         static void Main(string[] args)
@@ -43,7 +37,7 @@ namespace elasticsearch_dotnet
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Title)
-                        .Query("Elasticsearch")
+                        .Query("Elasticsearch medium makalesi için örnek - sametuca")
                     )
                 )
             );
