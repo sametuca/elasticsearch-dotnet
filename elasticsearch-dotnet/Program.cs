@@ -6,9 +6,12 @@ namespace elasticsearch_dotnet
     {
         static void Main(string[] args)
         {
-            var node = new Uri("http://localhost:9200");
+            var localHostUrl = "http://localhost:9200";
+            var defaultIndex = "sametuca-medium";
+
+            var node = new Uri(localHostUrl);
             var settings = new ConnectionSettings(node)
-                .DefaultIndex("sametuca-medium")
+                .DefaultIndex(defaultIndex)
                 .DisableDirectStreaming();
             var client = new ElasticClient(settings);
 
@@ -33,7 +36,7 @@ namespace elasticsearch_dotnet
 
             // Belgeyi sorgulama
             var searchResponse = client.Search<MyDocument>(s => s
-                .Index("sametuca-medium")
+                .Index(defaultIndex)
                 .Query(q => q
                     .Match(m => m
                         .Field(f => f.Title)
