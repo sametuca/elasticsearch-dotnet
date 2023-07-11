@@ -22,7 +22,6 @@ namespace elasticsearch_dotnet
                 Content = "Elasticsearch medium makalesi için örnek - sametuca"
             };
 
-            // Belgeyi indeksleme
             var indexResponse = client.IndexDocument(document);
 
             if (indexResponse.IsValid)
@@ -34,7 +33,6 @@ namespace elasticsearch_dotnet
                 Console.WriteLine("Belge indekslenirken hata oluştu: " + indexResponse.DebugInformation);
             }
 
-            // Belgeyi sorgulama
             var searchResponse = client.Search<MyDocument>(s => s
                 .Index(defaultIndex)
                 .Query(q => q
